@@ -4,15 +4,15 @@ import joblib
 from geopy.distance import great_circle
 
 app = Flask(__name__)
-app.config['SECRET_KEY'] = 'your_secret_key_here'  # Ensure to set a strong secret key
+app.config['SECRET_KEY'] = 'secret_key' 
 
-# Load the model
+
 model = joblib.load(r'C:\Users\hyper\OneDrive\Desktop\DevRep\frontend\best_model.pkl')
 
-# Load data for plotting and search
+
 data = pd.read_csv('synthetic_fish_population_cleaned_with_species2.csv')
 
-# Dummy user data for demonstration
+
 users = {
     'testuser': {'password': 'password123', 'field_of_work': 'fisherman'},
     'admin': {'password': 'adminpass', 'field_of_work': 'researcher'}
@@ -97,7 +97,7 @@ def add_data_fisherman():
         latitude = request.form.get('latitude')
         longitude = request.form.get('longitude')
         temperature = request.form.get('temperature')
-        # Handle the data, save it to the database, etc.
+      
         flash('Data added successfully!', 'success')
         return redirect(url_for('dashboard'))
     return render_template('add_data_fisherman.html')
@@ -114,9 +114,9 @@ def add_data_other():
         temperature = request.form.get('temperature')
         date = request.form.get('date')
         additional_info = request.form.get('additional_info')
-        # Handle the data (save to database, etc.)
+       
         flash('Data added successfully!', 'success')
-        return redirect(url_for('dashboard'))  # Adjust redirect as necessary
+        return redirect(url_for('dashboard')) 
     return render_template('add_data_other.html')
 
 
@@ -129,9 +129,9 @@ def fish_catch():
 
 @app.route('/show_data')
 def show_data():
-    # Load the dataset
+
     data = pd.read_csv('synthetic_fish_population_cleaned_with_species2.csv')
-    # Convert the DataFrame to HTML for rendering
+
     data_html = data.to_html(classes='table table-striped', index=False)
     return render_template('show_data.html', data_html=data_html)
 
